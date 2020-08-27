@@ -7,8 +7,8 @@ const client = new ApolloClient({ uri });
 
 const HomePage: React.FC = () => {
   return (
-    <div className="w-100 h-100 bg-light">
-
+    <div className="w-100 h-100 bg-light pt-5">
+        <h1 className="text-center font-weight-light">Hello World</h1>
     </div>
   );
 }
