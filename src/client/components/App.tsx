@@ -14,6 +14,9 @@ const App: React.FC = () => {
     <ApolloProvider client={client}>
       <Router>
         <div className="w-100 h-100 bg-light">
+          <div className="bg-primary w-100" style={{ position: 'fixed', height: '50px' }}>
+            <a href="/">Home</a>
+          </div>
           <Route path="/" component={HomePage} />
           <Route path="*" component={NotFound} />
         </div>
