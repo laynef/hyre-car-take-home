@@ -9,6 +9,11 @@ interface QueryChildren {
   data: any;
 }
 
+interface Results {
+  Make_ID: string;
+  Make_Name: string;
+}
+
 const MAKES_QUERY = gql`
   query Makes {
     makes {
@@ -29,8 +34,9 @@ const HomePage: React.FC = () => {
           { 
             ({ loading, data }: QueryChildren) => {
               if (loading) return <p>Loading...</p>;
-              
-              return <p>{JSON.stringify(data)}</p>
+              if (data && data.makes && data.makes.Results) {
+                return data.makes.Results.map((e: Results, i: number) => (<p key={i}>{e.Make_Name}</p>))
+              }
             }
           }
         </Query>
