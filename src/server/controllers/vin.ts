@@ -89,7 +89,7 @@ const VinSpecsAttributesType = new GraphQLObjectType({
 
 // Vin Spec Colors
 const VinSpecsColorType = new GraphQLObjectType({
-    name: 'VinSpecs',
+    name: 'VinSpecsColor',
     fields: () => ({
         category: { type: GraphQLString },
         name: { type: GraphQLString },

@@ -11,7 +11,7 @@ import {
 
   // Market Value Type
 const MarketValueType = new GraphQLObjectType({
-    name: 'Images',
+    name: 'MarketValue',
     fields: () => ({
         vin: { type: GraphQLString },
         averageTradeIn: { type: GraphQLInt },
@@ -28,7 +28,6 @@ export default {
     args: { vin: { type: GraphQLString } },
     type: MarketValueType,
     resolve(parent: any, args: any) {
-
         return axios
             .get('http://api.carsxe.com/marketvalue?' + parseQueryStrings({ vin: args.vin }))
             .then(res => res.data)
