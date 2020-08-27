@@ -7,15 +7,11 @@ import NotFound from './NotFound';
 
 
 const uri = '/api/v1/graphql';
-const client: any = typeof window !== 'undefined' && new ApolloClient({ uri });
-
-const Provider: React.FC = typeof window !== 'undefined' ? 
-  ({ children }) => <ApolloProvider client={client}>{children}</ApolloProvider> :
-  ({ children }) => <React.Fragment>{children}</React.Fragment>;
+const client = new ApolloClient({ uri });
 
 const App: React.FC = () => {
   return (
-      <Provider>
+      <ApolloProvider client={client}>
         <div className="w-100 h-100 bg-light">
           <Switch>
             <div className="bg-primary w-100" style={{ position: 'fixed', height: '50px' }}>
@@ -25,7 +21,7 @@ const App: React.FC = () => {
             <Route path="*" component={NotFound} />
           </Switch>
         </div>
-      </Provider>
+      </ApolloProvider>
   );
 }
 
