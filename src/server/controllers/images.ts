@@ -1,5 +1,5 @@
-import dotenv from 'dotenv';
 import axios from 'axios';
+import { parseQueryStrings } from './utils';
 import {
     GraphQLObjectType,
     GraphQLInt,
@@ -7,18 +7,9 @@ import {
     GraphQLList,
     GraphQLBoolean,
 } from 'graphql';
-dotenv.config();
 
 
-const parseQueryStrings = (object: any): string => {
-    let results = '';
-    for (let key in object) {
-        results += '&' + key + '=' + object[key];
-    }
-    return results.slice(1);
-}
-
-// Launch Type
+// Image Results Type
 const ImageResultsType = new GraphQLObjectType({
     name: 'ImageResults',
     fields: () => ({
@@ -30,7 +21,7 @@ const ImageResultsType = new GraphQLObjectType({
     })
 });
 
-// Launch Type
+// Queried Type
 const QueriedType = new GraphQLObjectType({
     name: 'QueriedType',
     fields: () => ({
@@ -43,7 +34,7 @@ const QueriedType = new GraphQLObjectType({
     })
 });
 
-  // Rocket Type
+  // Images Type
 const ImagesType = new GraphQLObjectType({
     name: 'Images',
     fields: () => ({
