@@ -6,6 +6,7 @@ import {
     GraphQLString,
     GraphQLList,
     GraphQLBoolean,
+    GraphQLScalarType,
 } from 'graphql';
 
 
@@ -65,8 +66,8 @@ const VinSpecsAttributesType = new GraphQLObjectType({
         rear_shoulder_room: { type: GraphQLString },
         front_hip_room: { type: GraphQLString },
         rear_hip_room: { type: GraphQLString },
-        interior_trim: new GraphQLList(GraphQLString),
-        exterior_color: new GraphQLList(GraphQLString),
+        // interior_trim: new GraphQLList(GraphQLString),
+        // exterior_color: new GraphQLList(GraphQLString),
         curb_weight_manual: { type: GraphQLString },
         ground_clearance: { type: GraphQLString },
         track_front: { type: GraphQLString },
