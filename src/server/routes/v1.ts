@@ -1,12 +1,12 @@
 import express from 'express';
 import { graphqlExpress } from 'apollo-server-express';
-import allMakes from '../controllers/makes';
+import schema from '../controllers';
 
 // Router
 const router = express();
 
 // Set Routes
-router.get('/makes', graphqlExpress({ schema: allMakes }));
+router.get('/graphql', graphqlExpress({ schema }));
 
 
 // Export
