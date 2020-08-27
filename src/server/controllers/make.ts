@@ -32,7 +32,7 @@ export default {
     args: {
         Make_ID: { type: GraphQLInt }
     },
-    type: new GraphQLList(MakeType),
+    type: MakeType,
     resolve(parent: any, args: any) {
         return axios
             .get('https://vpic.nhtsa.dot.gov/api/vehicles/GetModelsForMakeId/' + args.Make_ID + '?format=json')

@@ -8,15 +8,8 @@ const htmlMiddleware = () => (
   next: NextFunction
 ) => {
   const publicPath = path.join(__dirname, '/public');
-
-  fs.readFile(`${publicPath}/app.html`, 'utf8', (err, html) => {
-    if (!err) {
-      req.html = html;
-      next();
-    } else {
-      res.status(500).send('Error parsing app.html');
-    }
-  });
+  req.html = fs.readFileSync(`${publicPath}/app.html`, { encoding: 'utf8' });
+  next();
 };
 
 export default htmlMiddleware;

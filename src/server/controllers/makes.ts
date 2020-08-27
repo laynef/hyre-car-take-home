@@ -8,7 +8,7 @@ import {
 
 
 // Launch Type
-const MakeResultsType = new GraphQLObjectType({
+const MakesResultsType = new GraphQLObjectType({
     name: 'MakesResults',
     fields: () => ({
         Make_ID: { type: GraphQLInt },
@@ -17,17 +17,17 @@ const MakeResultsType = new GraphQLObjectType({
 });
   
   // Rocket Type
-const MakeType = new GraphQLObjectType({
+const MakesType = new GraphQLObjectType({
     name: 'Makes',
     fields: () => ({
         Count: { type: GraphQLInt },
-        Results: { type: new GraphQLList(MakeResultsType) },
+        Results: { type: new GraphQLList(MakesResultsType) },
     })
 });
 
 // Query
 export default {
-    type: new GraphQLList(MakeType),
+    type: MakesType,
     resolve(parent: any, args: any) {
         return axios
             .get('https://vpic.nhtsa.dot.gov/api/vehicles/getallmakes?format=json')

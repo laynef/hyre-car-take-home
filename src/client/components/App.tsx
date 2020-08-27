@@ -21,7 +21,7 @@ const App: React.FC = () => {
               <Route path="/">
                 <HomePage />
               </Route>
-              <Route path="*">
+              <Route>
                 <NotFound />
               </Route>
             </Switch>
