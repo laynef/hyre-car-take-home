@@ -9,7 +9,7 @@ import {
 } from 'graphql';
 
 
-  // Vin Specs Type
+// Vin Specs Attributes Type
 const VinSpecsAttributesType = new GraphQLObjectType({
     name: 'VinSpecsAttributes',
     fields: () => ({
@@ -86,6 +86,7 @@ const VinSpecsAttributesType = new GraphQLObjectType({
     })
 });
 
+// Vin Spec Colors
 const VinSpecsColorType = new GraphQLObjectType({
     name: 'VinSpecs',
     fields: () => ({
@@ -94,6 +95,7 @@ const VinSpecsColorType = new GraphQLObjectType({
     })
 })
 
+// Vin Specs
 const VinSpecsType = new GraphQLObjectType({
     name: 'VinSpecs',
     fields: () => ({
