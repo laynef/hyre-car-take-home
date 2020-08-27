@@ -4,7 +4,7 @@ import make from './make';
 
 
 // Root Query
-const RootQuery = new GraphQLObjectType({
+const query = new GraphQLObjectType({
     name: 'RootQueryType',
     fields: {
         makes,
@@ -13,8 +13,6 @@ const RootQuery = new GraphQLObjectType({
 });
 
 // schema
-const schema = new GraphQLSchema({
-    query: RootQuery,
-});
+const schema = new GraphQLSchema({ query });
 
 export default schema;
