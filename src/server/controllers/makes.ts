@@ -30,7 +30,7 @@ const MakeType = new GraphQLObjectType({
 const RootQuery = new GraphQLObjectType({
     name: 'RootQueryType',
     fields: {
-        launches: {
+        makes: {
             type: new GraphQLList(MakeType),
             resolve(parent, args) {
                 return axios
