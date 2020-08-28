@@ -25,17 +25,20 @@ const VinNumber: React.FC = (props: any) => {
   return (
     <div className="w-100 h-100 bg-light">
         <h1 className="text-center font-weight-light">Vin Number</h1>
-        <div className="d-flex flex-column align-items-center">
+        <div className="d-flex flex-column align-items-center w-100">
             <Query query={VIN_SPEC_QUERY} variables={{ vin }}>
                 {(vinData: QueryChildren) => {
                     if (vinData.loading) return <LoadingSpinner />
                     if (vinData.error) return null;
 
                     const { year, make, model } = get(vinData, 'data.vinSpec.attributes', {});
+                    if (!year || !make || !model) return null;
+
                     return (
                         <Query query={IMAGES_QUERY} variables={{ year, make, model }}>
                             {(imageData: QueryChildren) => {
                                 if (imageData.loading) return <LoadingSpinner />;
+                                if (imageData.error) return null;
 
                                 return (
                                     <React.Fragment>
