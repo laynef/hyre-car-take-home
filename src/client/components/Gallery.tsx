@@ -7,13 +7,42 @@ import {
   CarouselCaption
 } from 'reactstrap';
 
-const setItems = ({ link }: any) => ({
+
+interface ImageData {
+    mime: string;
+    width: number;
+    height: number;
+    link: string;
+    thumbnailLink: string;
+}
+
+interface QueriedData {
+    year: string;
+    make: string;
+    model: string;
+    transparent: string;
+    size: string;
+    format: string;
+}
+
+interface Props {
+    images: [ImageData];
+    query: QueriedData;
+}
+
+interface GalleryItem {
+    src: string;
+    caption: string;
+    altText: string;
+}
+
+const setItems = ({ link }: ImageData): GalleryItem => ({
     src: link,
     caption: '',
     altText: '',
 })
 
-const Gallery = (props: any) => {
+const Gallery = (props: Props) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [animating, setAnimating] = useState(false);
   const items = (props.images || []).map((image: any) => setItems(image));
@@ -30,12 +59,12 @@ const Gallery = (props: any) => {
     setActiveIndex(nextIndex);
   }
 
-  const goToIndex = (newIndex: any) => {
+  const goToIndex = (newIndex: number) => {
     if (animating) return;
     setActiveIndex(newIndex);
   }
 
-  const slides = items.map((item: any) => {
+  const slides = items.map((item: GalleryItem) => {
     return (
       <CarouselItem
         onExiting={() => setAnimating(true)}
