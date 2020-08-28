@@ -1,7 +1,13 @@
 import * as React from 'react';
-import gql from 'graphql-tag';
+import { useParams } from 'react-router-dom';
+import { loader } from 'graphql.macro';
 import { Query } from 'react-apollo';
+import LoadingSpinner from 'react-md-spinner';
+import Gallery from './Gallery';
 
+
+const IMAGES_QUERY = loader('../queries/images.graphql');
+const VIN_SPEC_QUERY = loader('../queries/vinSpecs.graphql');
 
 interface QueryChildren {
     loading: boolean;
@@ -9,10 +15,36 @@ interface QueryChildren {
     data: any;
 }
 
-const VinNumber: React.FC = () => {
+interface Params {
+    vin: string;
+}
+
+const VinNumber: React.FC = (props: any) => {
+  const { vin }: Params = useParams();
   return (
     <div className="w-100 h-100 bg-light">
         <h1 className="text-center font-weight-light">Vin Number</h1>
+        <Query query={VIN_SPEC_QUERY} variables={{ vin }}>
+            {(vinData: QueryChildren) => {
+                if (vinData.loading) return <LoadingSpinner />
+                if (vinData.error) return null;
+
+                const { year, make, model } = vinData.data.attributes;
+                return (
+                    <Query query={IMAGES_QUERY} variables={{ year, make, model }}>
+                        {(imageData: QueryChildren) => {
+                            if (imageData.loading) return <LoadingSpinner />;
+
+                            return (
+                                <div>
+
+                                </div>
+                            );
+                        }}
+                    </Query>
+                )
+            }}
+        </Query>
     </div>
   );
 }

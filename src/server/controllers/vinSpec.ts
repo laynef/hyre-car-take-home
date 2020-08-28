@@ -2,11 +2,8 @@ import axios from 'axios';
 import { parseQueryStrings } from './utils';
 import {
     GraphQLObjectType,
-    GraphQLInt,
     GraphQLString,
-    GraphQLList,
     GraphQLBoolean,
-    GraphQLScalarType,
 } from 'graphql';
 
 

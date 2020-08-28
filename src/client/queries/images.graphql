@@ -1,0 +1,21 @@
+query Images($make: String!, $model: String!, $year: String!) {
+    images(make: $make, model: $model, year: $year) {
+        images {
+            mime
+            width
+            height
+            link
+            thumbnailLink
+        }
+        query {
+            year
+            make
+            model
+            transparent
+            size
+            format
+        }
+        success
+        error
+    }
+}

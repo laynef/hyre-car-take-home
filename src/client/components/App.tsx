@@ -6,6 +6,8 @@ import HomePage from './HomePage';
 import NotFound from './NotFound';
 import VinNumber from './VinNumber';
 
+import '../styles/index.scss';
+
 
 const uri = '/api/v1/graphql';
 const client = new ApolloClient({ uri });

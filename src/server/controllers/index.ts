@@ -1,7 +1,7 @@
 import { GraphQLObjectType, GraphQLSchema } from 'graphql';
 import images from './images';
 import marketValue from './marketValue';
-import vin from './vin';
+import vinSpec from './vinSpec';
 
 
 // Root Query
@@ -10,7 +10,7 @@ const query = new GraphQLObjectType({
     fields: {
         images,
         marketValue,
-        vin,
+        vinSpec,
     }
 });
 
