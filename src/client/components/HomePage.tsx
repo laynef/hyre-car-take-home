@@ -11,7 +11,7 @@ const HomePage: React.FC = () => {
     if (validVinRegex.test(vin)) {
       history.push('/vin/' + vin)
     } else {
-      setError('Invalid vin number');
+      setError('Enter a valid vin number');
       setTimeout(() => setError(''), 3000);
     }
   };
