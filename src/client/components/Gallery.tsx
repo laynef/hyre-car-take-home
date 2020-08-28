@@ -26,7 +26,7 @@ interface QueriedData {
 }
 
 interface Props {
-    images: [ImageData];
+    images: ImageData[];
     query: QueriedData;
 }
 
