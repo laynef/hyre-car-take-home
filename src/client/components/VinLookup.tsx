@@ -20,7 +20,7 @@ interface Params {
     vin: string;
 }
 
-const VinNumber: React.FC = (props: any) => {
+const VinLookup: React.FC = (props: any) => {
   const { vin }: Params = useParams();
   return (
     <div className="w-100 h-100 bg-light">
@@ -55,4 +55,4 @@ const VinNumber: React.FC = (props: any) => {
   );
 }
 
-export default VinNumber;
+export default VinLookup;

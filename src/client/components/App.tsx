@@ -4,7 +4,7 @@ import { ApolloProvider } from 'react-apollo';
 import { Route, Switch } from 'react-router-dom';
 import HomePage from './HomePage';
 import NotFound from './NotFound';
-import VinNumber from './VinNumber';
+import VinLookup from './VinLookup';
 
 import '../styles/index.scss';
 
@@ -24,7 +24,7 @@ const App: React.FC = () => {
                 <HomePage />
               </Route>
               <Route exact path="/vin/:vin">
-                <VinNumber />
+                <VinLookup />
               </Route>
               <Route exact path="*">
                 <NotFound />
