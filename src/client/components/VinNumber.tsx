@@ -29,7 +29,7 @@ const VinNumber: React.FC = (props: any) => {
                 if (vinData.loading) return <LoadingSpinner />
                 if (vinData.error) return null;
 
-                const { year, make, model } = vinData.data.attributes;
+                const { year, make, model } = vinData.data.vinSpec.attributes;
                 return (
                     <Query query={IMAGES_QUERY} variables={{ year, make, model }}>
                         {(imageData: QueryChildren) => {
