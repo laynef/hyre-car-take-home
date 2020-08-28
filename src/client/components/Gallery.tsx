@@ -42,7 +42,7 @@ const setItems = ({ link, year, make, model, thumbnailLink }: ImageData & Querie
     altText: `${year} ${make} ${model}`,
 })
 
-const Gallery = (props: Props) => {
+const Gallery : React.FC<Props> = (props) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [animating, setAnimating] = useState(false);
   const items = (props.images || []).map((image: any) => setItems({ ...image, ...props.query }));
@@ -82,6 +82,7 @@ const Gallery = (props: Props) => {
       activeIndex={activeIndex}
       next={next}
       previous={previous}
+      className="w-100"
     >
       <CarouselIndicators items={items} activeIndex={activeIndex} onClickHandler={goToIndex} />
       {slides}

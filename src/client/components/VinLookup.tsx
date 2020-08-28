@@ -4,6 +4,8 @@ import { loader } from 'graphql.macro';
 import { Query } from 'react-apollo';
 import LoadingSpinner from 'react-md-spinner';
 import Gallery from './Gallery';
+import ColorPicker from './ColorPicker';
+import Details from './Details';
 import { get } from 'lodash';
 
 
@@ -20,8 +22,15 @@ interface Params {
     vin: string;
 }
 
-const VinLookup: React.FC = (props: any) => {
+interface Color {
+    name: string;
+    category: string;
+}
+
+const VinLookup: React.FC = () => {
   const { vin }: Params = useParams();
+  const [color, setColor] = React.useState('white');
+
   return (
     <div className="w-100 h-100 bg-light">
         <h1 className="text-center font-weight-light">Vin Number</h1>
@@ -31,11 +40,13 @@ const VinLookup: React.FC = (props: any) => {
                     if (vinData.loading) return <LoadingSpinner />
                     if (vinData.error) return null;
 
-                    const { year, make, model } = get(vinData, 'data.vinSpec.attributes', {});
-                    if (!year || !make || !model) return null;
+                    const attributes = get(vinData, 'data.vinSpec.attributes', {});
+                    const colors = get(vinData, 'data.vinSpec.colors', {}).filter((e: Color) => e.category === "Exterior");
+                    const { year, make, model } = attributes;
+                    if (!year || !make || !model || !color) return null;
 
                     return (
-                        <Query query={IMAGES_QUERY} variables={{ year, make, model }}>
+                        <Query query={IMAGES_QUERY} variables={{ year, make, model, color }}>
                             {(imageData: QueryChildren) => {
                                 if (imageData.loading) return <LoadingSpinner />;
                                 if (imageData.error) return null;
@@ -46,6 +57,8 @@ const VinLookup: React.FC = (props: any) => {
                                             query={get(imageData, 'data.images.query', {})} 
                                             images={get(imageData, 'data.images.images', [])} 
                                         />
+                                        <ColorPicker setColor={setColor} colors={colors} />
+                                        <Details attributes={attributes} />
                                     </React.Fragment>
                                 );
                             }}

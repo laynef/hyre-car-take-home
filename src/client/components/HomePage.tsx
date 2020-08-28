@@ -6,11 +6,11 @@ const HomePage: React.FC = () => {
   const [vin, setVin] = React.useState('');
   const [error, setError] = React.useState('');
   const history = useHistory();
-  
+
   const onClick = () => {
     const validVinRegex = /^[A-HJ-NPR-Za-hj-npr-z\d]{8}[\dX][A-HJ-NPR-Za-hj-npr-z\d]{2}\d{6}$/;
     if (validVinRegex.test(vin)) {
-      history.push('/vin/' + vin)
+      history.push('/vin/' + vin);
     } else {
       setError('Enter a valid vin number');
       setTimeout(() => setError(''), 3000);

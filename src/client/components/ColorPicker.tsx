@@ -1,9 +1,19 @@
 import * as React from 'react';
 
 
-const ColorPicker: React.FC = () => {
+interface Color {
+  name: string;
+  category: string;
+}
+
+interface Props {
+  colors: Color[];
+  setColor: () => void;
+}
+
+const ColorPicker: React.FC<Props> = ({ colors, setColor }) => {
   return (
-    <div>
+    <div className="w-100">
 
     </div>
   );
