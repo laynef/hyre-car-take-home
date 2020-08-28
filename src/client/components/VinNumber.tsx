@@ -4,6 +4,7 @@ import { loader } from 'graphql.macro';
 import { Query } from 'react-apollo';
 import LoadingSpinner from 'react-md-spinner';
 import Gallery from './Gallery';
+import { get } from 'lodash';
 
 
 const IMAGES_QUERY = loader('../queries/images.graphql');
@@ -24,27 +25,29 @@ const VinNumber: React.FC = (props: any) => {
   return (
     <div className="w-100 h-100 bg-light">
         <h1 className="text-center font-weight-light">Vin Number</h1>
-        <Query query={VIN_SPEC_QUERY} variables={{ vin }}>
-            {(vinData: QueryChildren) => {
-                if (vinData.loading) return <LoadingSpinner />
-                if (vinData.error) return null;
+        <div className="d-flex flex-column align-items-center">
+            <Query query={VIN_SPEC_QUERY} variables={{ vin }}>
+                {(vinData: QueryChildren) => {
+                    if (vinData.loading) return <LoadingSpinner />
+                    if (vinData.error) return null;
 
-                const { year, make, model } = vinData.data.vinSpec.attributes;
-                return (
-                    <Query query={IMAGES_QUERY} variables={{ year, make, model }}>
-                        {(imageData: QueryChildren) => {
-                            if (imageData.loading) return <LoadingSpinner />;
+                    const { year, make, model } = get(vinData, 'data.vinSpec.attributes', {});
+                    return (
+                        <Query query={IMAGES_QUERY} variables={{ year, make, model }}>
+                            {(imageData: QueryChildren) => {
+                                if (imageData.loading) return <LoadingSpinner />;
 
-                            return (
-                                <div>
-
-                                </div>
-                            );
-                        }}
-                    </Query>
-                )
-            }}
-        </Query>
+                                return (
+                                    <React.Fragment>
+                                        <Gallery images={get(imageData, 'data.images.images', [])} />
+                                    </React.Fragment>
+                                );
+                            }}
+                        </Query>
+                    )
+                }}
+            </Query>
+        </div>
     </div>
   );
 }
