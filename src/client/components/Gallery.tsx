@@ -36,16 +36,16 @@ interface GalleryItem {
     altText: string;
 }
 
-const setItems = ({ link }: ImageData): GalleryItem => ({
-    src: link,
-    caption: '',
-    altText: '',
+const setItems = ({ link, year, make, model, thumbnailLink }: ImageData & QueriedData): GalleryItem => ({
+    src: thumbnailLink || link,
+    caption: `${year} ${make} ${model}`,
+    altText: `${year} ${make} ${model}`,
 })
 
 const Gallery = (props: Props) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [animating, setAnimating] = useState(false);
-  const items = (props.images || []).map((image: any) => setItems(image));
+  const items = (props.images || []).map((image: any) => setItems({ ...image, ...props.query }));
 
   const next = () => {
     if (animating) return;

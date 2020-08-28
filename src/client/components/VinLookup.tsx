@@ -42,7 +42,10 @@ const VinLookup: React.FC = (props: any) => {
 
                                 return (
                                     <React.Fragment>
-                                        <Gallery images={get(imageData, 'data.images.images', [])} />
+                                        <Gallery 
+                                            query={get(imageData, 'data.images.query', {})} 
+                                            images={get(imageData, 'data.images.images', [])} 
+                                        />
                                     </React.Fragment>
                                 );
                             }}
