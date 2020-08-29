@@ -1,5 +1,6 @@
 import * as React from 'react';
 import convert from 'color-convert';
+import { uniqBy } from 'lodash';
 
 
 interface Color {
@@ -27,7 +28,7 @@ const getColors = (colors: Color[]): Color[] => {
 }
 
 const ColorPicker: React.FC<Props> = ({ title, colors }) => {
-  const items = getColors(colors);
+  const items = uniqBy(getColors(colors), 'rgb');
 
   return (
     <div className="w-100 bg-white d-flex flex-column card p-2">
@@ -35,7 +36,7 @@ const ColorPicker: React.FC<Props> = ({ title, colors }) => {
       <div className="w-100 d-flex flex-row" style={{ overflow: 'auto', overflowY: 'hidden' }}>
         {items.map((color: Color, index: number) => (
           <div key={index} className="p-1">
-            <div className="rounded-circle" style={{ backgroundColor: color.rgb, height: '50px', width: '50px' }} />
+            <div className="rounded-circle border" style={{ backgroundColor: color.rgb, height: '50px', width: '50px' }} />
           </div>
         ))}
       </div>

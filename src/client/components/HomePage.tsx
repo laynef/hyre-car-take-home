@@ -17,12 +17,12 @@ const HomePage: React.FC = () => {
 
   React.useLayoutEffect(() => {
     if (parsed.error) {
-      createError('Enter a valid vin number');
+      createError('Vin not found');
     }
   }, []);
 
   const onClick = () => {
-    const validVinRegex = /^[A-HJ-NPR-Za-hj-npr-z\d]{8}[\dX][A-HJ-NPR-Za-hj-npr-z\d]{2}\d{6}$/;
+    const validVinRegex = /^[A-HJ-NPR-Za-hj-npr-z\d]{8}[\dX][A-HJ-NPR-Za-hj-npr-z\d]{2}\d{6}$/i;
     if (validVinRegex.test(vin)) {
       history.push('/vin/' + vin);
     } else {

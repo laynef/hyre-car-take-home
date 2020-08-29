@@ -56,7 +56,10 @@ interface Props {
 }
 
 const Details: React.FC<Props> = (props) => {
-  const items = map(props.attributes, (value, name) => ({ value, name: startCase(name) }));
+  const items = map(props.attributes, (value, name) => ({ 
+    value: !!value ? startCase(value) : 'N/A', 
+    name: startCase(name),
+  }));
 
   return (
     <div className="w-100 bg-light d-flex flex-wrap mt-3 mw-100">
