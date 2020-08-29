@@ -59,10 +59,10 @@ const Details: React.FC<Props> = (props) => {
   const items = map(props.attributes, (value, name) => ({ value, name: startCase(name) }));
 
   return (
-    <div className="w-100 bg-light d-flex flex-wrap">
+    <div className="w-100 bg-light d-flex flex-wrap mt-3">
         {items.map((item, index) => (
-            <Tile className="card bg-white" key={index}>
-                <p>{item.name}: {item.value}</p>
+            <Tile key={index}>
+                <p className="card bg-white p-2">{item.name}: {item.value}</p>
             </Tile>
         ))}
     </div>
