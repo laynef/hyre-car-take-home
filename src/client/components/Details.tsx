@@ -65,7 +65,7 @@ const Details: React.FC<Props> = (props) => {
     <div className="w-100 bg-light d-flex flex-wrap mt-3 mw-100">
         {items.map((item, index) => (
             <Tile key={index}>
-                <p className="card bg-white p-2">{item.name}: {item.value}</p>
+                <p className="card shadow-sm bg-white p-2">{item.name}: {item.value}</p>
             </Tile>
         ))}
     </div>
