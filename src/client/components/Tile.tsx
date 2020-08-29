@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Col } from 'reactstrap';
 
 interface Props {
-    children: React.ReactNode;
+    children?: React.ReactNode;
     className?: string;
 }
 

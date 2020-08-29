@@ -1,19 +1,32 @@
 import * as React from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
+import queryString from "query-string";
 
 
 const HomePage: React.FC = () => {
   const [vin, setVin] = React.useState('');
   const [error, setError] = React.useState('');
   const history = useHistory();
+  const location = useLocation();
+  const parsed = queryString.parse(location.search);
+
+  const createError = (str: string) => {
+    setError(str);
+    setTimeout(() => setError(''), 3000);
+  }
+
+  React.useLayoutEffect(() => {
+    if (parsed.error) {
+      createError('Enter a valid vin number');
+    }
+  }, [error]);
 
   const onClick = () => {
     const validVinRegex = /^[A-HJ-NPR-Za-hj-npr-z\d]{8}[\dX][A-HJ-NPR-Za-hj-npr-z\d]{2}\d{6}$/;
     if (validVinRegex.test(vin)) {
       history.push('/vin/' + vin);
     } else {
-      setError('Enter a valid vin number');
-      setTimeout(() => setError(''), 3000);
+      createError('Enter a valid vin number');
     }
   };
 
@@ -24,7 +37,7 @@ const HomePage: React.FC = () => {
           <div className="d-flex flex-column p-3">
             <input onChange={e => setVin(e.target.value)} className="form-control mb-2" type="text" placeholder="Enter a vin number" />
             <input onSubmit={onClick} onClick={onClick} type="submit" value="Submit" className="btn btn-outline-primary" />
-            {error && <div className="text-left text-danger">{error}</div>}
+            {error && <div className="text-left mt-2 text-danger">{error}</div>}
           </div>
         </div>
     </div>

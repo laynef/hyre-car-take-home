@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { loader } from 'graphql.macro';
 import { Query } from 'react-apollo';
 import LoadingSpinner from 'react-md-spinner';
@@ -29,7 +29,7 @@ interface Color {
 
 const VinLookup: React.FC = () => {
   const { vin }: Params = useParams();
-  const [color, setColor] = React.useState('white');
+  const history = useHistory();
 
   return (
     <div className="w-100 h-100 bg-light">
@@ -38,17 +38,19 @@ const VinLookup: React.FC = () => {
             <Query query={VIN_SPEC_QUERY} variables={{ vin }}>
                 {(vinData: QueryChildren) => {
                     if (vinData.loading) return <LoadingSpinner />
-                    if (vinData.error) return null;
+                    if (vinData.error) history.push('/?error=true');
 
                     const attributes = get(vinData, 'data.vinSpec.attributes', {});
-                    const colors = get(vinData, 'data.vinSpec.colors', {})
+                    const colors = get(vinData, 'data.vinSpec.colors', []);
+
                     const exteriorColors = colors.filter((e: Color) => e.category === "Exterior");
                     const interiorColors = colors.filter((e: Color) => e.category === "Interior");
+
                     const { year, make, model } = attributes;
-                    if (!year || !make || !model || !color) return null;
+                    if (!year || !make || !model) history.push('/?error=true');
 
                     return (
-                        <Query query={IMAGES_QUERY} variables={{ year, make, model, color }}>
+                        <Query query={IMAGES_QUERY} variables={{ year, make, model }}>
                             {(imageData: QueryChildren) => {
                                 if (imageData.loading) return <LoadingSpinner />;
                                 if (imageData.error) return null;
@@ -59,8 +61,8 @@ const VinLookup: React.FC = () => {
                                             query={get(imageData, 'data.images.query', {})} 
                                             images={get(imageData, 'data.images.images', [])} 
                                         />
-                                        <ColorPicker title="Exterior Colors" setColor={setColor} colors={exteriorColors} />
-                                        <ColorPicker title="Interior Colors" setColor={setColor} colors={interiorColors} />
+                                        <ColorPicker title="Exterior Colors" colors={exteriorColors} />
+                                        <ColorPicker title="Interior Colors" colors={interiorColors} />
                                         <Details attributes={attributes} />
                                     </React.Fragment>
                                 );
