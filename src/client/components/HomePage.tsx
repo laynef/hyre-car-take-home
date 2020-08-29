@@ -19,7 +19,7 @@ const HomePage: React.FC = () => {
     if (parsed.error) {
       createError('Enter a valid vin number');
     }
-  }, [error]);
+  }, []);
 
   const onClick = () => {
     const validVinRegex = /^[A-HJ-NPR-Za-hj-npr-z\d]{8}[\dX][A-HJ-NPR-Za-hj-npr-z\d]{2}\d{6}$/;
