@@ -37,7 +37,7 @@ const VinLookup: React.FC = () => {
         <div className="d-flex flex-column align-items-center w-100">
             <Query query={VIN_SPEC_QUERY} variables={{ vin }}>
                 {(vinData: QueryChildren) => {
-                    if (vinData.loading) return <LoadingSpinner />
+                    if (vinData.loading) return <LoadingSpinner className="mt-2" />
                     if (vinData.error) history.push('/?error=true');
 
                     const attributes = get(vinData, 'data.vinSpec.attributes', {});
@@ -52,8 +52,8 @@ const VinLookup: React.FC = () => {
                     return (
                         <Query query={IMAGES_QUERY} variables={{ year, make, model }}>
                             {(imageData: QueryChildren) => {
-                                if (imageData.loading) return <LoadingSpinner />;
-                                if (imageData.error) return null;
+                                if (imageData.loading) return <LoadingSpinner className="mt-2" />;
+                                if (imageData.error) history.push('/?error=true');
 
                                 return (
                                     <React.Fragment>
