@@ -30,7 +30,7 @@ const ColorPicker: React.FC<Props> = ({ title, colors }) => {
   const items = getColors(colors);
 
   return (
-    <div className="w-100 bg-white d-flex flex-column p-2">
+    <div className="w-100 bg-white d-flex flex-column card p-2">
       <h2 className="w-100 h4 font-weight-light">{title}</h2>
       <div className="w-100 d-flex flex-row" style={{ overflow: 'auto', overflowY: 'hidden' }}>
         {items.map((color: Color, index: number) => (
