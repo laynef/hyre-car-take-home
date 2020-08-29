@@ -3,7 +3,20 @@ import { Request, Response } from 'express';
 
 
 const renderMiddleware = () => (req: Request, res: Response) => {
-  res.send(req.html);
+  let html = req.html || '';
+  const htmlReplacements: StringMap = {
+    HTML_CONTENT: '',
+  };
+
+  Object.keys(htmlReplacements).forEach(key => {
+    const value = htmlReplacements[key];
+    html = html.replace(
+      new RegExp('__' + escapeStringRegexp(key) + '__', 'g'),
+      value
+    );
+  });
+
+  res.send(html);
 };
 
 export default renderMiddleware;
