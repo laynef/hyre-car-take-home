@@ -41,7 +41,9 @@ const VinLookup: React.FC = () => {
                     if (vinData.error) return null;
 
                     const attributes = get(vinData, 'data.vinSpec.attributes', {});
-                    const colors = get(vinData, 'data.vinSpec.colors', {}).filter((e: Color) => e.category === "Exterior");
+                    const colors = get(vinData, 'data.vinSpec.colors', {})
+                    const exteriorColors = colors.filter((e: Color) => e.category === "Exterior");
+                    const interiorColors = colors.filter((e: Color) => e.category === "Interior");
                     const { year, make, model } = attributes;
                     if (!year || !make || !model || !color) return null;
 
@@ -57,7 +59,8 @@ const VinLookup: React.FC = () => {
                                             query={get(imageData, 'data.images.query', {})} 
                                             images={get(imageData, 'data.images.images', [])} 
                                         />
-                                        <ColorPicker setColor={setColor} colors={colors} />
+                                        <ColorPicker title="Exterior Colors" setColor={setColor} colors={exteriorColors} />
+                                        <ColorPicker title="Interior Colors" setColor={setColor} colors={interiorColors} />
                                         <Details attributes={attributes} />
                                     </React.Fragment>
                                 );
