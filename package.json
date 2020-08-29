@@ -44,7 +44,7 @@
     "typescript": "4.0.2"
   },
   "scripts": {
-    "start": "react-ssr-scripts start",
+    "start": "node ./build",
     "build": "react-ssr-scripts build",
     "test": "react-ssr-scripts test",
     "eject": "react-ssr-scripts eject"
