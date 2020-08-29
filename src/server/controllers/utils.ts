@@ -1,7 +1,10 @@
+import * as dotenv from 'dotenv';
+dotenv.config();
+
 export const parseQueryStrings = (object: any = {}): string => {
     let results = '';
     object.format = 'json';
-    object.key = '2iqktup9w_urqbnabtj_8wfiafq2r';
+    object.key = process.env.API_KEY;
 
     for (let key in object) {
         results += '&' + key + '=' + object[key];
