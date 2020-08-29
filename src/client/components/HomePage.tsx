@@ -17,12 +17,16 @@ const HomePage: React.FC = () => {
 
   React.useLayoutEffect(() => {
     if (parsed.error) {
-      createError('Vin not found');
+      createError('Vehicle not found');
     }
   }, []);
 
   const onClick = () => {
-    history.push('/vin/' + vin);
+    if (vin) {
+      history.push('/vin/' + vin);
+    } else {
+      createError('Enter a valid vin number');
+    }
   };
 
   return (
