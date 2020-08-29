@@ -17,7 +17,7 @@ const App: React.FC = () => {
       <ApolloProvider client={client}>
         <Router>
           <div className="w-100 h-100 bg-light">
-            <div className="bg-primary w-100 card shadow d-flex flex-row align-items-center" style={{ position: 'fixed', height: '50px' }}>
+            <div className="bg-primary w-100 card shadow d-flex flex-row align-items-center" style={{ position: 'fixed', height: '50px', zIndex: 9999 }}>
               <a className="ml-3 text-white" href="/">Vehicle Lookup</a>
             </div>
             <Switch>

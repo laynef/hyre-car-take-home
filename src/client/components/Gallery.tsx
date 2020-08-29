@@ -82,7 +82,6 @@ const Gallery : React.FC<Props> = (props) => {
       activeIndex={activeIndex}
       next={next}
       previous={previous}
-      className="w-100"
     >
       <CarouselIndicators items={items} activeIndex={activeIndex} onClickHandler={goToIndex} />
       {slides}

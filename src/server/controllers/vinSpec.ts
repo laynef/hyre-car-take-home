@@ -4,6 +4,7 @@ import {
     GraphQLObjectType,
     GraphQLString,
     GraphQLBoolean,
+    GraphQLList,
 } from 'graphql';
 
 
@@ -98,7 +99,7 @@ const VinSpecsType = new GraphQLObjectType({
     name: 'VinSpecs',
     fields: () => ({
         attributes: { type: VinSpecsAttributesType },
-        colors: { type: VinSpecsColorType },
+        colors: { type: new GraphQLList(VinSpecsColorType) },
         error: { type: GraphQLString },
         success: { type: GraphQLBoolean },
     })

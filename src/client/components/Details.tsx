@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Tile from './Tile';
-import { map } from 'lodash';
+import { map, startCase } from 'lodash';
+
 
 interface Attributes {
     year: string;
@@ -55,10 +56,10 @@ interface Props {
 }
 
 const Details: React.FC<Props> = (props) => {
-  const items = map(props.attributes, (value, name) => ({ value, name }));
+  const items = map(props.attributes, (value, name) => ({ value, name: startCase(name) }));
 
   return (
-    <div className="w-100 d-flex">
+    <div className="w-100 d-flex flex-wrap">
         {items.map((item, index) => (
             <Tile key={index}>
                 <p>{item.name}: {item.value}</p>
