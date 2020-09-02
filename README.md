@@ -15,3 +15,9 @@ Listen http://localhost:3000
 To run tests:
 
 ### `yarn test`
+
+Example VIN Numbers:
+
+### 1FT8X3BT0BEA61538
+
+### JTDZN3EU0E3298500
